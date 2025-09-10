@@ -19,5 +19,6 @@ fi
 # compressed dSYM files are small
 $TAR Jcfv ffmpeg-${SUFFIX}{.tar.xz,}
 ls -lh *.xz
-[ "$GITHUB_EVENT_NAME" == "pull_request" ] && exit 0
+
+echo $GITHUB_EVENT_NAME
 
