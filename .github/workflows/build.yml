@@ -689,9 +689,3 @@ jobs:
       with:
         name: FFmpeg.xcframework-${{ env.FF_VERSION }}-lite
         path: FFmpeg.xcframework-${{ env.FF_VERSION }}-lite.tar.xz
-    - name: Upload to SourceForge
-      if: (github.event_name != 'pull_request')
-      shell: bash
-      run:  |
-        brew install hudochenkov/sshpass/sshpass
-        sshpass -p $SF_PW_MAPPED scp -o StrictHostKeyChecking=no FFmpeg.xcframework-${{ env.FF_VERSION }}-lite.tar.xz $SF_USER_MAPPED,avbuild@frs.sourceforge.net:/home/frs/project/a/av/avbuild/xcframework/
