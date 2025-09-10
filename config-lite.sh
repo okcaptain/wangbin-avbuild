@@ -11,11 +11,11 @@ $USER_OPT
 DEC_OPT_MOBILE=""
 DEMUX_OPT_MOBILE="--disable-demuxer=image*"
 ENC_OPT_MOBILE="--enable-encoder=mjpeg,png"
-MUX_OPT_MOBILE="--enable-muxers=mov,matroska,mpegts"
+MUX_OPT_MOBILE="--enable-muxer=mov,matroska,mpegts"
 PROT_OPT_MOBILE=""
 FILTER_OPT_MOBILE=""
 PROT_OPT="${PROT_OPT_MOBILE}"
-DEC_OPT="${DEC_OPT_MOBILE}"                # vvc*
+DEC_OPT="${DEC_OPT_MOBILE}"         # vvc*
 DEMUX_OPT="${DEMUX_OPT_MOBILE}"     # vvc
 ENC_OPT="${ENC_OPT_MOBILE}"
 MUX_OPT="${MUX_OPT_MOBILE}"
