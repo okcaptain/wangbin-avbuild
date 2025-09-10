@@ -6,9 +6,6 @@ USER_OPT="--enable-small \
 --enable-decoders \
 --enable-demuxers \
 --enable-protocols \
---enable-gpl \
---enable-version3 \
---enable-nonfree \
 $USER_OPT
 "
 DEC_OPT_MOBILE=""
