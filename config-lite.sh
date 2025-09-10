@@ -1,6 +1,6 @@
 USER_OPT="--enable-small \
 --disable-outdevs \
---enable-filters \
+--disable-filters \
 --disable-muxers \
 --disable-encoders \
 --enable-decoders \
@@ -13,13 +13,13 @@ DEMUX_OPT_MOBILE="--disable-demuxer=image*"
 ENC_OPT_MOBILE="--enable-encoder=mjpeg,png"
 MUX_OPT_MOBILE="--enable-muxer=mov,matroska,mpegts"
 PROT_OPT_MOBILE=""
-FILTER_OPT_MOBILE=""
+FILTER_OPT_MOBILE="--enable-filter=*null*,afade,*fifo,*format,*resample,aeval,atempo,pan,crop,eq*,framerate,hw*,loudnorm,scale,volume,yadif*,*movie,overlay"
 PROT_OPT="${PROT_OPT_MOBILE}"
 DEC_OPT="${DEC_OPT_MOBILE}"         # vvc*
 DEMUX_OPT="${DEMUX_OPT_MOBILE}"     # vvc
 ENC_OPT="${ENC_OPT_MOBILE}"
 MUX_OPT="${MUX_OPT_MOBILE}"
-FILTER_OPT="$FILTER_OPT_MOBILE"
+FILTER_OPT="$FILTER_OPT_MOBILE,allrgb,allyuv,*bars,color,test*,*key,draw*,*_qsv,*_vaapi,*v4l2*"
 android_OPT="--disable-avdevice"
 ohos_OPT="--disable-avdevice"
 ios_OPT="--disable-avdevice"
