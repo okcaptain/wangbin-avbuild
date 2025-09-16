@@ -1,0 +1,59 @@
+Subject: [PATCH] hls.c add max_seg_fail
+---
+Index: libavformat/hls.c
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/libavformat/hls.c b/libavformat/hls.c
+--- a/libavformat/hls.c	(revision c13c4046860b95e8c73f9cf7d2e19abe12866377)
++++ b/libavformat/hls.c	(date 1758005243932)
+@@ -231,6 +231,7 @@
+     int http_multiple;
+     int http_seekable;
+     int seg_max_retry;
++    int max_seg_fail;
+     AVIOContext *playlist_pb;
+     HLSCryptoContext  crypto_ctx;
+ } HLSContext;
+@@ -1634,6 +1635,7 @@
+     int ret;
+     int just_opened = 0;
+     int segment_retries = 0;
++    int max_seg_fail = 0;
+     struct segment *seg;
+ 
+     if (c->http_persistent && v->input_read_done) {
+@@ -1645,6 +1647,9 @@
+     v->input_read_done = 0;
+ 
+ restart:
++    if (max_seg_fail > c->max_seg_fail)
++        return AVERROR_EOF;
++
+     ret = reload_playlist(v, c);
+     if (ret < 0)
+         return ret;
+@@ -1680,9 +1685,11 @@
+             } else {
+                 segment_retries++;
+             }
++            max_seg_fail++;
+             goto restart;
+         }
+         segment_retries = 0;
++        max_seg_fail = 0;
+         just_opened = 1;
+     }
+ 
+@@ -2818,7 +2825,9 @@
+     {"seg_format_options", "Set options for segment demuxer",
+         OFFSET(seg_format_opts), AV_OPT_TYPE_DICT, {.str = NULL}, 0, 0, FLAGS},
+     {"seg_max_retry", "Maximum number of times to reload a segment on error.",
+-     OFFSET(seg_max_retry), AV_OPT_TYPE_INT, {.i64 = 0}, 0, INT_MAX, FLAGS},
++            OFFSET(seg_max_retry), AV_OPT_TYPE_INT, {.i64 = 0}, 0, INT_MAX, FLAGS},
++    {"max_seg_fail", "Maximum number of segment on error.",
++                OFFSET(max_seg_fail), AV_OPT_TYPE_INT, {.i64 = 30}, 0, INT_MAX, FLAGS},
+     {NULL}
+ };
+ 
